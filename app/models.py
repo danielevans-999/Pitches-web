@@ -46,7 +46,7 @@ class Types(db.Model):
     
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255), index = True)
-    pitches = db.relationship('Pitch', backref = 'category', lazy = "dynamic")
+    pitches = db.relationship('Pitch', backref = 'type', lazy = "dynamic")
 
     @classmethod
     def get_categories(cls):
@@ -70,7 +70,7 @@ class Pitch(db.Model):
 
     @classmethod
     def get_pitches(cls, id):
-        pitches = Pitch.query.filter_by(category_id = id).all()
+        pitches = Pitch.query.filter_by(type_id = id).all()
         return pitches
     
     
