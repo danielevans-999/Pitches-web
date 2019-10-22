@@ -7,7 +7,7 @@
             <h5 class="card-title">{{type.name}}</h5>
             <p class="card-text">Take a minute of your life to do something awesome to change the world ,it really feels
                 good.</p>
-            <a href="/type/{{type.id}}" class="btn btn-info">view pitches</a>
+            <a href="/category/{{type.id}}" class="btn btn-info">view pitches</a>
         </div>
     </div>
 </div>
@@ -34,9 +34,21 @@
             <p>{{pitch.pitch}}</p>
         </div>
         <div class="card-footer">
-            <a class="btn btn-info" href="/type/pitch/new/{{types.id}}">Add</a>
+            <a class="btn btn-info" href="/category/pitch/new/{{types.id}}">Add</a>
         </div>
     </div>
+</div>
+{% endfor %}
+{% endmacro %}
+
+
+{% macro displayComments(comment_list) %}
+{% for comment in comment_list %}
+<div>
+    <li class="list-item">
+        <h3>{{comment.commet_Post}}</h3>
+        <p>by {{comment.user.username}}</p>
+    </li>
 </div>
 {% endfor %}
 {% endmacro %}
