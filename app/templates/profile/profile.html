@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import 'macros.html' as macro %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -14,15 +15,21 @@
             {% endif %}
 
             {% if user == current_user %}
-            <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+            <a class="btn btn-sm btn-outline-info" href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+            <a class="btn btn-sm btn-outline-info" href="/user/pitches/{{current_user.id}}">my pitches</a>
+
+
             {% endif %}
         </div>
         <!--Displaying pofile photo -->
         <div class="col-md-4">
 
+
+
             {% if user.profile_pic_path %}
 
-            <img class="img-circle" src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail" height="200px" width="200px" style="border-radius:50%">
+            <img class="img-circle" src="{{url_for('static',filename=user.profile_pic_path)}}" alt=""
+                class="img-thumbnail" height="200px" width="200px" style="border-radius:50%">
 
             {%else%}
             <p>No profile picture</p>
@@ -35,9 +42,14 @@
                 <input type="submit">
 
             </form>
-
-
         </div>
     </div>
+    <div class="row" style="padding-left: 150px;">
+
+
+        {{macro.displayForProfile(types)}}
+    </div>
+
+</div>
 </div>
 {% endblock %}
