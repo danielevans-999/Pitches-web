@@ -42,8 +42,9 @@ def pitch_new(id):
     types = Types.query.filter_by(id=id).first()
     if form.validate_on_submit():
         pitch = form.pitch.data
+        title = form.title.data
 
-        new_pitch = Pitch(type_id=types.id, pitch=pitch, user=current_user)
+        new_pitch = Pitch(type_id=types.id, title=title, pitch=pitch, user=current_user)
         new_pitch.save_pitch()
         return redirect(url_for('.single_type', id=types.id))
 
