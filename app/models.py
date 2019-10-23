@@ -82,6 +82,13 @@ class Pitch(db.Model):
         pitches = Pitch.query.filter_by(type_id = id).all()
         return pitches
     
+    @classmethod
+    def get_pitches_user(cls,id):
+        pitches = Pitch.query.filter_by(user_id = id).all()
+        return pitches
+        
+            
+    
     
 class Comment(db.Model):
     
