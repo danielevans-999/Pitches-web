@@ -17,7 +17,7 @@ def register():
         
         mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
 
-        return redirect(url_for('.login'))
+        return redirect(url_for('auth.login'))
         flash('Registered successfully')
     title = "New Account"
     return render_template('auth/register.html', title=title, registration_form=form)
