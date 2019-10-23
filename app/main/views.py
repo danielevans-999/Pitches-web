@@ -52,7 +52,7 @@ def pitch_new(id):
     return render_template('add_pitch.html', title=title, pitch_form=form, types=types)
 
 
-@main.route('/comments/new/<int:id>', methods=['GET', 'POST'])
+@main.route('/comments/new/<int:id>', methods=["GET", "POST"])
 @login_required
 def comment(id):
     '''
@@ -77,17 +77,20 @@ def comments(id):
     pitch = Pitch.query.get(id)
     comment = Comment.get_comments(pitch.id)
     title = f'{pitch.title} comments'
+    print(comment)
 
-    return render_template('comments.html', title=title, pitch=pitch, comment=comment)
+    return render_template('comments.html', title=title, pitch=pitch, comment = comment)
+ 
 
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
+    types = Types.query.all()
 
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user = user)
+    return render_template("profile/profile.html", user = user,types = types)
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
@@ -121,3 +124,14 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
+
+@main.route('/user/pitches/<int:id>')
+def mypitches(id):
+    
+    users = User.query.get(id)
+    title = f'{users.username} pitches'
+    pitches = Pitch.get_pitches_user(users.id)
+    
+    return render_template('mypitches.html',title=title,pitches=pitches)
+    
+    
