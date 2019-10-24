@@ -6,6 +6,7 @@ from flask_migrate import Migrate,MigrateCommand
 app = create_app('production')
 
 manage = Manager(app)
+migrate = Migrate(app,db)
 manage.add_command('db',MigrateCommand)
 manage.add_command('server',Server)
 
