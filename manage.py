@@ -3,10 +3,9 @@ from flask_script import Manager,Server
 from app.models import User,Comment,Pitch,Role,Types
 from flask_migrate import Migrate,MigrateCommand
 #creating app instance
-app = create_app('development')
+app = create_app('production')
 
 manage = Manager(app)
-migrate = Migrate(app,db)
 manage.add_command('db',MigrateCommand)
 manage.add_command('server',Server)
 
